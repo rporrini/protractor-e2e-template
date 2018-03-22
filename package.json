@@ -1,0 +1,39 @@
+{
+  "name": "@mia-platform/backoffice-cms-site",
+  "version": "4.2.0",
+  "scripts": {
+    "pretest": "webdriver-manager update",
+    "test": "protractor protractor.conf.js"
+  },
+  "devDependencies": {
+    "@mia-platform/standard-mia": "1.1.0",
+    "babel-core": "6.3.26",
+    "babel-loader": "6.1.0",
+    "babel-plugin-transform-es2015-modules-commonjs-simple": "6.7.4",
+    "babel-plugin-transform-runtime": "6.15.0",
+    "babel-polyfill": "6.3.14",
+    "babel-preset-es2015": "6.1.18",
+    "babel-preset-stage-0": "6.16.0",
+    "babel-runtime": "6.18.0",
+    "chai": "4.1.2",
+    "chai-as-promised": "7.1.1",
+    "chai-subset-in-order": "2.1.2",
+    "eslint": "4.19.0",
+    "mocha": "4.0.1",
+    "protractor": "5.2.0",
+    "sinon": "4.1.3",
+    "sinon-chai": "2.14.0",
+    "supertest": "3.0.0",
+    "system-sleep": "1.3.6"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/@mia-platform/eslint-config-mia/eslintrc.json",
+    "env": {
+      "mocha": true
+    }
+  },
+  "private": true
+}
