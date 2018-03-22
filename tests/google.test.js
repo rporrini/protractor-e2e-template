@@ -9,10 +9,23 @@ before(() => {
 });
 
 describe('google home page', () => {
+
   it('should display the name', () => {
+
     return new User(() => 'http://google.com')
       .onAPlainHtmlPage()
       .visit('/')
       .title().should.eventually.be.equal('Google')
+  })
+
+  it('should support searches by the users', function() {
+    return new User(() => 'http://google.com')
+      .onAPlainHtmlPage()
+      .visit('/')
+      .elementWithXPath('title', 'Cerca con Google')
+      .type('gattini')
+      .submit()
+      .elementWithId('resultStats')
+      .text().should.eventually.match(/risultati/)
   })
 })

@@ -50,6 +50,10 @@ export default class User {
     return this.enqueue(() => element.all(by.css(`${type}[id^='${id}']`)).first())
   }
 
+  elementWithXPath (attribute, value) {
+    return this.enqueue(() => element.all(by.css(`*[${attribute}^='${value}']`)).first())
+  }
+
   button (text) {
     return this.enqueue(() => element(by.buttonText(text)))
   }
@@ -61,6 +65,10 @@ export default class User {
 
   selectAll () {
     return this.enqueue(element => element.sendKeys(protractor.Key.chord(protractor.Key.CONTROL, 'a')))
+  }
+
+  submit () {
+    return this.enqueue(element => element.sendKeys(protractor.Key.ENTER))
   }
 
   type (text) {
