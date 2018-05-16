@@ -1,6 +1,6 @@
 {
-  "name": "@mia-platform/backoffice-cms-site",
-  "version": "4.2.0",
+  "name": "protractor-e2e-template",
+  "version": "0.0.1",
   "scripts": {
     "pretest": "webdriver-manager update",
     "test": "protractor protractor.conf.js"
