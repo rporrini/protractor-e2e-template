@@ -22,7 +22,7 @@ describe('google home page', () => {
     return new User(() => 'http://google.com')
       .onAPlainHtmlPage()
       .visit('/')
-      .elementWithXPath('title', 'Cerca con Google')
+      .elementWithName('q')
       .type('gattini')
       .submit()
       .elementWithId('resultStats')

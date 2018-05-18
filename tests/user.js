@@ -1,12 +1,3 @@
-const textEqualTo = text => option => option
-  .getText()
-  .then(optionText => optionText === text)
-const options = by.tagName('option')
-const selectOptionCorrespondingTo = text => element => element
-  .all(options)
-  .filter(textEqualTo(text))
-  .first()
-
 export default class User {
 
   constructor (url) {
@@ -24,20 +15,12 @@ export default class User {
     return this.waitRedirectionTo(page)
   }
 
-  waitForAWhile () {
-    return this.waitFor(5000)
-  }
-
-  waitFor (milliseconds) {
-    return this.enqueue(() => browser.sleep(milliseconds))
-  }
-
   waitRedirectionTo (page) {
     return this.enqueue(() => browser.wait(protractor.ExpectedConditions.urlContains(page), 12000))
   }
 
-  waitForAction (action) {
-    return this.enqueue(action)
+  waitFor (milliseconds) {
+    return this.enqueue(() => browser.sleep(milliseconds))
   }
 
   holdOn (test) {
@@ -47,24 +30,37 @@ export default class User {
   }
 
   elementWithId (id, type = '*') {
-    return this.enqueue(() => element.all(by.css(`${type}[id^='${id}']`)).first())
+    const byId = by.css(`${type}[id^='${id}']`)
+    return this.waitForElement(byId)
   }
 
-  elementWithXPath (attribute, value) {
-    return this.enqueue(() => element.all(by.css(`*[${attribute}^='${value}']`)).first())
+  waitForElement (selector) {
+    const message = `Element ${selector} is not visible`
+    const timeout = 55000
+    this.enqueue(() => element.all(selector).first())
+    return this.enqueue(e => browser
+      .wait(protractor.ExpectedConditions.visibilityOf(e), timeout, message)
+      .then(() => e))
+  }
+
+  elementWithName (name) {
+    const byName = by.css(`*[name^='${name}']`)
+    return this.waitForElement(byName)
+  }
+
+  elementWithTitle (title) {
+    const byTitle = by.css(`*[title^='${title}']`)
+    return this.waitForElement(byTitle)
+  }
+
+  elementWithClass (className) {
+    const byClass = by.css(`*[class^='${className}']`)
+    return this.waitForElement(byClass)
   }
 
   button (text) {
-    return this.enqueue(() => element(by.buttonText(text)))
-  }
-
-  select (text) {
-    this.enqueue(selectOptionCorrespondingTo(text))
-    return this.click()
-  }
-
-  selectAll () {
-    return this.enqueue(element => element.sendKeys(protractor.Key.chord(protractor.Key.CONTROL, 'a')))
+    const buttonText = by.buttonText(text)
+    return this.waitForElement(buttonText)
   }
 
   submit () {
@@ -83,23 +79,17 @@ export default class User {
     return this.enqueue(() => browser.waitForAngularEnabled(false))
   }
 
+  onAngular () {
+    return this.enqueue(() => browser.waitForAngularEnabled(true))
+  }
+
   lines () {
     this.text()
     return this.enqueue(text => text.split('\n').filter(line => line.length > 0))
   }
 
-  onASinglePageApplication () {
-    this.enqueue(() => browser.waitForAngularEnabled(true))
-    return this.currentAction
-  }
-
   text () {
     this.enqueue(element => element.getText())
-    return this.currentAction
-  }
-
-  verify (assertion) {
-    this.enqueue(assertion)
     return this.currentAction
   }
 

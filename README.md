@@ -14,4 +14,5 @@ Template project for writing e2e tests with [protractor](https://www.protractort
 
 ### Run the e2e tests
 
-* ```npm t```
+* ```npm t ``` - headless mode
+* ```npm run test:head ``` - opens a web browser window
