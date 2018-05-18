@@ -9,7 +9,7 @@ Template project for writing e2e tests with [protractor](https://www.protractort
 
 ### Installation
 
-* ```git clone https://github.com/rporrini/protractor-e2e-template.git```
+* ```git clone https://github.com/rporrini/protractor-e2e-template.git && cd protractor-e2e-template```
 * ```npm i```
 
 ### Run the e2e tests
