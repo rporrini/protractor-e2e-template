@@ -10,7 +10,10 @@ exports.config = {
   directConnect: true,
   framework: 'mocha',
   mochaOpts: {
-    reporter: 'spec',
+    reporter: 'mocha-jenkins-reporter',
+    reporterOptions: {
+      "junit_report_path": "reports/suite.xml",
+    },
     timeout: 60000,
   },
   specs: [

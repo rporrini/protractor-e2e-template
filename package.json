@@ -2,7 +2,7 @@
   "name": "e2e-tests",
   "version": "1.0.0",
   "scripts": {
-    "postinstall": "webdriver-manager update --gecko=false",
+    "postinstall": "webdriver-manager update --versions.chrome 2.41 --gecko=false",
     "test": "cross-env HEADLESS=true npm run test:head",
     "test:head": "protractor protractor.conf.js"
   },
@@ -13,6 +13,7 @@
     "chai-as-promised": "7.1.1",
     "cross-env": "5.1.5",
     "mocha": "5.1.1",
+    "mocha-jenkins-reporter": "0.4.0",
     "protractor": "5.3.2"
   },
   "babel": {
